@@ -1,0 +1,58 @@
+<template>
+  <div class="shaft">
+    <div v-for="item in floorStore.floorCount" class="floor_container">
+      <floor />
+      <cabin v-if="floorStore.chosenFloor == item.floorNumber"/>
+      <div class="floor_buttons">
+        <div class="button"></div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import Floor from "./Floor.vue";
+import Cabin from "./Cabin.vue";
+import { useFloorStore } from "../store/floor.js";
+export default {
+  name: "Shaft",
+
+  setup() {
+    const floorStore = useFloorStore();
+    return { floorStore };
+  },
+  components: {
+    Floor, Cabin
+  },
+};
+</script>
+
+<style scoped>
+.shaft {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  align-items: center;
+  background-color: black;
+}
+.floor_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.floor_buttons {
+  height: 20px;
+  width: 10px;
+  background-color: silver;
+  order: 1;
+}
+.button {
+  height: 4px;
+  width: 4px;
+  margin-top: 8px;
+  margin-left: 3px;
+  border-radius: 5px;
+  background-color: green;
+}
+</style>
