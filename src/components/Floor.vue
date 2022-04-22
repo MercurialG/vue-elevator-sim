@@ -2,6 +2,7 @@
   <div class="floor">
     <!-- <cabin v-if="floorStore.floorCount.length == 5" /> -->
     <!-- <slot name="`floor${floors[i]}`"></slot> -->
+    <slot></slot>
   </div>
 </template>
 
@@ -12,8 +13,8 @@ export default {
   name: "Floor",
   setup() {
     const floorStore = useFloorStore();
-    let floors = floorStore.floorCount
-    let chosenFloor = floorStore.chosenFloor
+    let floors = floorStore.floorCount;
+    let chosenFloor = floorStore.chosenFloor;
     return { floorStore, floors, chosenFloor };
   },
   components: {
@@ -36,6 +37,6 @@ export default {
   border-color: black;
 }
 .cabin {
-
+  /* position: absolute; */
 }
 </style>

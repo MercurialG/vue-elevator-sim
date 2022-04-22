@@ -1,10 +1,12 @@
 <script setup>
-import Cabin from './components/Cabin.vue'
-import Shaft from './components/Shaft.vue'
+import Cabin from "./components/Cabin.vue";
+import Shaft from "./components/Shaft.vue";
+import ControlPanel from "./components/ControlPanel.vue";
 </script>
 
 <template>
-<shaft/>
+  <shaft />
+  <controlPanel />
 </template>
 
 <style>
@@ -16,8 +18,10 @@ import Shaft from './components/Shaft.vue'
   color: #2c3e50;
   margin-top: 60px;
 }
-.shaft{
-    margin-left: 49.6vw;
-
+.shaft {
+  margin-left: 49.6vw;
+}
+.controlPanel {
+  margin-left: 5vw;
 }
 </style>

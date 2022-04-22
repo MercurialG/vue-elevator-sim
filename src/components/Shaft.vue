@@ -1,8 +1,9 @@
 <template>
   <div class="shaft">
     <div v-for="item in floorStore.floorCount" class="floor_container">
-      <floor />
-      <cabin v-if="floorStore.chosenFloor == item.floorNumber"/>
+      <floor>
+        <cabin v-if="floorStore.chosenFloor == item.floorNumber" />
+      </floor>
       <div class="floor_buttons">
         <div class="button"></div>
       </div>
@@ -19,10 +20,12 @@ export default {
 
   setup() {
     const floorStore = useFloorStore();
+    const floors = floorStore.floorCount.reverse();
     return { floorStore };
   },
   components: {
-    Floor, Cabin
+    Floor,
+    Cabin,
   },
 };
 </script>
@@ -54,5 +57,8 @@ export default {
   margin-left: 3px;
   border-radius: 5px;
   background-color: green;
+}
+.floor {
+  z-index: 999;
 }
 </style>
