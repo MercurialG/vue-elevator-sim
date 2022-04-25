@@ -1,16 +1,9 @@
 <template>
   <div class="controlPanel">
-    <input
-      class="floorCount"
-      v-model="floorCount.length"
-      @input="floorStore.setFloorCount(floorCount.length)"
-    />
+    <input class="floorCount" v-model="floorCount.length" />
     <br />
-    <button
-      class="cp_button"
-      @click="floorStore.setFloorCount(floorCount.length) && floorStore.ride"
-    >
-      CALL
+    <button class="cp_button" @click="floorStore.setFloorCount(floorCount.length)">
+      set floors
     </button>
     <button class="cp_button" @click="increase">UP</button>
     <button class="cp_button" @click="decrease">DOWN</button>
@@ -33,7 +26,7 @@ export default {
   name: "ControlPanel",
   setup() {
     const floorStore = useFloorStore();
-    let floorCount = ref([0, 1, 2, 3, 4, 5]);
+    let floorCount = reactive([1, 2]);
     let increase = floorStore.increaseFloor;
     let decrease = floorStore.decreaseFloor;
 

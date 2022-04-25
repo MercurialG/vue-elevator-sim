@@ -1,6 +1,6 @@
 <template>
   <div class="shaft">
-    <div v-for="item in floorStore.floorCount" class="floor_container">
+    <div v-for="item in floorStore.floorCount.slice().reverse()" class="floor_container">
       <floor>
         <cabin v-if="floorStore.chosenFloor == item.floorNumber" />
       </floor>
@@ -15,12 +15,11 @@
 import Floor from "./Floor.vue";
 import Cabin from "./Cabin.vue";
 import { useFloorStore } from "../store/floor.js";
+import { reactive, ref } from "vue";
 export default {
   name: "Shaft",
-
   setup() {
     const floorStore = useFloorStore();
-    const floors = floorStore.floorCount.reverse();
     return { floorStore };
   },
   components: {

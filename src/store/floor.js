@@ -2,7 +2,10 @@ import { defineStore } from "pinia";
 
 export const useFloorStore = defineStore("floorStore", {
   state: () => ({
-    floorCount: [],
+    floorCount: [
+      { floorNumber: 1, chosen: true },
+      { floorNumber: 2, chosen: true }
+    ],
     chosenFloor: 1,
     currentFloor: 1,
     floorQueue: [],
@@ -32,9 +35,11 @@ export const useFloorStore = defineStore("floorStore", {
         if (nextFloor > this.currentFloor) {
           this.floorQueue.push(nextFloor);
           this.queueSort(this.floorQueue);
+          console.log('Queue up sorted')
         } else {
           this.secondFloorQueue.push(nextFloor);
           this.queueSort(this.secondFloorQueue);
+          console.log('Queue down sorted')
         }
       }
     },
@@ -42,11 +47,23 @@ export const useFloorStore = defineStore("floorStore", {
       console.log(queue);
       if (this.currentFloor < queue[0]) {
         queue.sort((a, b) => a - b);
-      } else queue.sort((a, b) => b - a);
+        console.log('Ride up initiated')
+        this.ride()
+      } else {
+        queue.sort((a, b) => b - a);
+        console.log('Ride down initiated')
+        this.ride()
+      }
     },
-    ride(){
-      this.floorQueue.forEach(element => { this.chosenFloor = element
+    ride() { 
+      // for (let i = 0;i <= this.floorQueue; i++) {
+      //   setTimeout(this.chosenFloor = i, 5000)
+      //   console.log('Ride to', this.chosenFloor)
+      // }
+      this.floorQueue.forEach((element) => {
+        setTimeout(this.chosenFloor = element, 10000)
+        console.log('Ride to', this.chosenFloor)
       });
-    }
+    },
   },
 });
