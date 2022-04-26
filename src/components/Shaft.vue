@@ -11,22 +11,13 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import Floor from "./Floor.vue";
 import Cabin from "./Cabin.vue";
 import { useFloorStore } from "../store/floor.js";
 import { reactive, ref } from "vue";
-export default {
-  name: "Shaft",
-  setup() {
-    const floorStore = useFloorStore();
-    return { floorStore };
-  },
-  components: {
-    Floor,
-    Cabin,
-  },
-};
+name: "Shaft";
+const floorStore = useFloorStore();
 </script>
 
 <style scoped>

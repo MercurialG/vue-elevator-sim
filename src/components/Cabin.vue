@@ -8,10 +8,8 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "Cabin",
-};
+<script setup>
+name: "Cabin";
 </script>
 
 <style scoped>

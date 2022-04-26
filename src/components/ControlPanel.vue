@@ -19,20 +19,14 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { useFloorStore } from "../store/floor.js";
 import { reactive, ref } from "vue";
-export default {
-  name: "ControlPanel",
-  setup() {
-    const floorStore = useFloorStore();
-    let floorCount = reactive([1, 2]);
-    let increase = floorStore.increaseFloor;
-    let decrease = floorStore.decreaseFloor;
-
-    return { floorStore, increase, decrease, floorCount };
-  },
-};
+name: "ControlPanel";
+let floorStore = useFloorStore();
+let floorCount = reactive([1, 2]);
+let increase = floorStore.increaseFloor;
+let decrease = floorStore.decreaseFloor;
 </script>
 
 <style scoped>

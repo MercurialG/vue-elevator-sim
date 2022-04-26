@@ -48,11 +48,11 @@ export const useFloorStore = defineStore("floorStore", {
       if (this.currentFloor < queue[0]) {
         queue.sort((a, b) => a - b);
         console.log('Ride up initiated')
-        this.ride()
+        setInterval(this.ride, 2000)
       } else {
         queue.sort((a, b) => b - a);
         console.log('Ride down initiated')
-        this.ride()
+        setInterval(this.ride, 2000)
       }
     },
     ride() { 
@@ -61,7 +61,7 @@ export const useFloorStore = defineStore("floorStore", {
       //   console.log('Ride to', this.chosenFloor)
       // }
       this.floorQueue.forEach((element) => {
-        setTimeout(this.chosenFloor = element, 10000)
+        this.chosenFloor = element
         console.log('Ride to', this.chosenFloor)
       });
     },
