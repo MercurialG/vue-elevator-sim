@@ -1,8 +1,10 @@
 <template>
   <div class="shaft">
-    <div v-for="item in floorStore.floorCount.slice().reverse()" class="floor_container">
+    <div v-for="item in floorStore.floors.slice().reverse()" class="floor_container">
       <floor>
-        <cabin v-if="floorStore.chosenFloor == item.floorNumber" />
+        <transition name="elevator">
+          <cabin id="elevator" v-if="floorStore.currentFloor == item.floorNumber" />
+        </transition>
       </floor>
       <div class="floor_buttons">
         <div class="button"></div>
@@ -15,9 +17,16 @@
 import Floor from "./Floor.vue";
 import Cabin from "./Cabin.vue";
 import { useFloorStore } from "../store/floor.js";
-import { reactive, ref } from "vue";
+import { reactive, ref, computed } from "vue";
 name: "Shaft";
 const floorStore = useFloorStore();
+
+// function makeEaseInOut(timing) {
+//   return function (timeFraction) {
+//     if (timeFraction < 0.5) return timing(2 * timeFraction) / 2;
+//     else return (2 - timing(2 * (1 - timeFraction))) / 2;
+//   };
+// }
 </script>
 
 <style scoped>
@@ -50,5 +59,8 @@ const floorStore = useFloorStore();
 }
 .floor {
   z-index: 999;
+}
+.elevator-enter-active {
+  transition: all 0.3s ease-in-out;
 }
 </style>

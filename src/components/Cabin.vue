@@ -1,5 +1,5 @@
 <template>
-  <div class="cabin">
+  <div id="cabin" class="cabin">
     <div class="cabin_top"></div>
     <div class="doors">
       <div class="door_left"></div>

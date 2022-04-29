@@ -2,7 +2,10 @@
   <div class="controlPanel">
     <input class="floorCount" v-model="floorCount.length" />
     <br />
-    <button class="cp_button" @click="floorStore.setFloorCount(floorCount.length)">
+    <button
+      class="cp_button"
+      @click="floorStore.setFloorCount(floorCount.length) && moveUp()"
+    >
       set floors
     </button>
     <button class="cp_button" @click="increase">UP</button>
@@ -27,6 +30,11 @@ let floorStore = useFloorStore();
 let floorCount = reactive([1, 2]);
 let increase = floorStore.increaseFloor;
 let decrease = floorStore.decreaseFloor;
+let elevator = document.getElementById("elevator");
+const moveUp = function () {
+  elevator.style.transform = "translateY(" + Math.min(progress / 10, 200) + "px)";
+  requestAnimationFrame(moveUp);
+};
 </script>
 
 <style scoped>
