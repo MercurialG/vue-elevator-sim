@@ -30,6 +30,22 @@ const floorStore = useFloorStore();
 </script>
 
 <style scoped>
+@keyframes cabin-movement {
+  from {
+    transform: translateY(0%);
+  }
+
+  to {
+    transform: translateY(-111%);
+  }
+}
+
+.elevator {
+  animation-name: cabin-movement;
+  animation-duration: 1s;
+  animation-direction: ease-in-out;
+}
+
 .shaft {
   display: flex;
   flex-direction: column;

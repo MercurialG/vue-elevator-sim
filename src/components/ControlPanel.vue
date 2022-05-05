@@ -29,24 +29,49 @@ let floorCount = reactive([1, 2]);
 let increase = floorStore.increaseFloor;
 let decrease = floorStore.decreaseFloor;
 let elevator = document.getElementById("elevator");
+const run = () => elevator.classList.toggle("elevator");
 const changeFloor = (floor) => {
   floorStore.floorSequence(floor);
-  window.requestAnimationFrame(step);
+  run();
 };
-var start = null;
-var element = document.getElementById("cabin");
 
-function step(timestamp) {
-  if (!start) start = timestamp;
-  var progress = timestamp - start;
-  elevator.style.transform = "translateY(" + Math.min(-progress / 18, 100) + "px)";
-  if (progress < 2000) {
-    window.requestAnimationFrame(step);
-  }
-}
+// Анимация через keyFrame (В целом работает)
+// let elevator = document.getElementById("elevator");
+// const changeFloor = (floor) => {
+//   floorStore.floorSequence(floor);
+//   window.requestAnimationFrame(step);
+// };
+// var start = null;
+// var element = document.getElementById("cabin");
+
+// function step(timestamp) {
+//   if (!start) start = timestamp;
+//   var delta = timestamp - start;
+//   var shift = (105 / 1000) * delta;
+//   elevator.style.transform = `translateY(${-shift}px)`;
+//   // checkOverflow
+//   if (delta < 2000) {
+//     window.requestAnimationFrame(step);
+//   }
+// }
 </script>
 
 <style scoped>
+@keyframes cabin-movement {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: 100;
+  }
+}
+
+.elevator {
+  animation-name: cabin-movement;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
 .controlPanel {
   display: flex;
   gap: 20px;
