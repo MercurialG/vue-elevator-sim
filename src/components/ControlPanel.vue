@@ -2,10 +2,7 @@
   <div class="controlPanel">
     <input class="floorCount" v-model="floorCount.length" />
     <br />
-    <button
-      class="cp_button"
-      @click="floorStore.setFloorCount(floorCount.length) && moveUp()"
-    >
+    <button class="cp_button" @click="floorStore.setFloorCount(floorCount.length)">
       set floors
     </button>
     <button class="cp_button" @click="increase">UP</button>
@@ -14,7 +11,7 @@
       <button
         v-for="floor in floorCount.length"
         class="cp_button"
-        @click="floorStore.floorSequence(floor)"
+        @click="changeFloor(floor)"
       >
         {{ floor }}
       </button>
@@ -25,16 +22,28 @@
 <script setup>
 import { useFloorStore } from "../store/floor.js";
 import { reactive, ref } from "vue";
+// import animation from "../animation.js";
 name: "ControlPanel";
 let floorStore = useFloorStore();
 let floorCount = reactive([1, 2]);
 let increase = floorStore.increaseFloor;
 let decrease = floorStore.decreaseFloor;
 let elevator = document.getElementById("elevator");
-const moveUp = function () {
-  elevator.style.transform = "translateY(" + Math.min(progress / 10, 200) + "px)";
-  requestAnimationFrame(moveUp);
+const changeFloor = (floor) => {
+  floorStore.floorSequence(floor);
+  window.requestAnimationFrame(step);
 };
+var start = null;
+var element = document.getElementById("cabin");
+
+function step(timestamp) {
+  if (!start) start = timestamp;
+  var progress = timestamp - start;
+  elevator.style.transform = "translateY(" + Math.min(-progress / 18, 100) + "px)";
+  if (progress < 2000) {
+    window.requestAnimationFrame(step);
+  }
+}
 </script>
 
 <style scoped>
