@@ -22,17 +22,15 @@
 <script setup>
 import { useFloorStore } from "../store/floor.js";
 import { reactive, ref } from "vue";
-// import animation from "../animation.js";
 name: "ControlPanel";
 let floorStore = useFloorStore();
-let floorCount = reactive([1, 2]);
+let floorCount = ref([1, 2]);
 let increase = floorStore.increaseFloor;
 let decrease = floorStore.decreaseFloor;
-let elevator = document.getElementById("elevator");
-const run = () => elevator.classList.toggle("elevator");
+// let elevator = document.getElementById("cabin");
+// const run = () => elevator.classList.add("elevator-down");
 const changeFloor = (floor) => {
   floorStore.floorSequence(floor);
-  run();
 };
 
 // Анимация через keyFrame (В целом работает)
@@ -57,21 +55,6 @@ const changeFloor = (floor) => {
 </script>
 
 <style scoped>
-@keyframes cabin-movement {
-  0% {
-    top: 0;
-  }
-  100% {
-    top: 100;
-  }
-}
-
-.elevator {
-  animation-name: cabin-movement;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
-}
-
 .controlPanel {
   display: flex;
   gap: 20px;

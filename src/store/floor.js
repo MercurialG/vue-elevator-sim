@@ -10,6 +10,7 @@ export const useFloorStore = defineStore("floorStore", {
     currentFloor: 1,
     floorQueue: [],
     secondFloorQueue: [],
+    elevator: 0,
   }),
   getters: {
     floorsCount: (state) => state.floors,
@@ -23,8 +24,7 @@ export const useFloorStore = defineStore("floorStore", {
         }
       } else console.log(num, "number is too big");
     },
-    
-    
+
     increaseFloor() {
       this.chosenFloor++;
     },
@@ -48,31 +48,43 @@ export const useFloorStore = defineStore("floorStore", {
       }
     },
     queueSort(queue) {
+      this.elevator = document.getElementById("cabin");
       console.log(queue);
       if (this.currentFloor < queue[0]) {
         queue.sort((a, b) => a - b);
         console.log("Ride up initiated");
-        setInterval(this.rideUp, 2000);
-      } else {
+        this.rideUp();
+      }
+      // if ((this.currentFloor = queue[0])) {
+      //   console.log("You already are on this floor");
+      // }
+      else {
         queue.sort((a, b) => b - a);
         console.log("Ride down initiated");
-        setInterval(this.rideDown, 2000);
+        this.rideDown();
       }
     },
+
     rideUp() {
       for (let i = 0; i < this.floorQueue.length; i++) {
-        setInterval(this.currentFloor = this.floorQueue.shift(), 2000)
+        this.currentFloor = this.floorQueue.shift();
         console.log("Ride to", this.currentFloor);
+        this.runUp();
       }
     },
     rideDown() {
       for (let i = 0; i < this.secondFloorQueue.length; i++) {
-        setInterval(this.currentFloor = this.secondFloorQueue.shift(),2000);
+        this.currentFloor = this.secondFloorQueue.shift();
         console.log("Ride to", this.currentFloor);
+        this.runDown();
       }
     },
-
-
+    runUp() {
+      this.elevator.classList.toggle("elevator-up");
+    },
+    runDown() {
+      this.elevator.classList.toggle("elevator-down");
+    },
 
     // this.floorQueue.forEach((element) => {
     //   this.chosenFloor = element

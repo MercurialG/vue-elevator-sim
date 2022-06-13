@@ -2,9 +2,7 @@
   <div class="shaft">
     <div v-for="item in floorStore.floors.slice().reverse()" class="floor_container">
       <floor>
-        <transition name="elevator">
-          <cabin id="elevator" v-if="floorStore.currentFloor == item.floorNumber" />
-        </transition>
+        <cabin id="cabin" v-if="floorStore.currentFloor == item.floorNumber" />
       </floor>
       <div class="floor_buttons">
         <div class="button"></div>
@@ -29,21 +27,37 @@ const floorStore = useFloorStore();
 // }
 </script>
 
-<style scoped>
-@keyframes cabin-movement {
+<style>
+@keyframes cabin-movement-up {
   from {
-    transform: translateY(0%);
+    transform: translateY(0px);
   }
 
   to {
-    transform: translateY(-111%);
+    transform: translateY(-109px);
+  }
+}
+@keyframes cabin-movement-down {
+  from {
+    transform: translateY(0px);
+  }
+
+  to {
+    transform: translateY(109px);
   }
 }
 
-.elevator {
-  animation-name: cabin-movement;
+.elevator-up {
+  animation-name: cabin-movement-up;
   animation-duration: 1s;
   animation-direction: ease-in-out;
+  animation-fill-mode: forwards;
+}
+.elevator-down {
+  animation-name: cabin-movement-down;
+  animation-duration: 1s;
+  animation-direction: ease-in-out;
+  animation-fill-mode: forwards;
 }
 
 .shaft {
@@ -74,7 +88,7 @@ const floorStore = useFloorStore();
   background-color: green;
 }
 .floor {
-  z-index: 999;
+  /* z-index: 999; */
 }
 .elevator-enter-active {
   transition: all 0.3s ease-in-out;

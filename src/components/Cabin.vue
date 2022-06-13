@@ -1,5 +1,5 @@
 <template>
-  <div id="cabin" class="cabin">
+  <div class="cabin">
     <div class="cabin_top"></div>
     <div class="doors">
       <div class="door_left"></div>
@@ -12,14 +12,18 @@
 name: "Cabin";
 </script>
 
-<style scoped>
+<style>
 .cabin {
+  position: absolute;
+  top: 105;
+  left: 669;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100px;
   width: 70px;
+  z-index: 9999;
   background-color: black;
 }
 .cabin_top {
